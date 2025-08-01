@@ -6,9 +6,11 @@ use App\Http\Controllers\Api\V1\Auth\NewPasswordController;
 use App\Http\Controllers\Api\V1\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Api\V1\Auth\RegistrationController;
 use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\PermissionController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\RoleController;
+use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,5 +53,11 @@ Route::prefix('v1')->group(function () {
 
         // Permissions Routes
         Route::apiResource('permissions', PermissionController::class);
+
+        // Categories Routes
+        Route::apiResource('categories', CategoryController::class);
+
+        // Tags Routes
+        Route::apiResource('tags', TagController::class);
     });
 });

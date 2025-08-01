@@ -51,6 +51,30 @@ class PermissionsSeeder extends Seeder
             Permission::create(['name' => $permissionPermission]);
         }
 
+        $categoriesPermissions = [
+            'categories:viewAny',
+            'categories:view',
+            'categories:create',
+            'categories:update',
+            'categories:delete',
+        ];
+
+        foreach ($categoriesPermissions as $categoryPermission) {
+            Permission::create(['name' => $categoryPermission]);
+        }
+
+        $tagsPermissions = [
+            'tags:viewAny',
+            'tags:view',
+            'tags:create',
+            'tags:update',
+            'tags:delete',
+        ];
+
+        foreach ($tagsPermissions as $tagPermission) {
+            Permission::create(['name' => $tagPermission]);
+        }
+
         // Create Roles and assign existing Permissions
         $role1 = Role::create(['name' => 'customer']);
 
@@ -58,6 +82,8 @@ class PermissionsSeeder extends Seeder
         $role2->givePermissionTo($usersPermissions);
         $role2->givePermissionTo($rolesPermissions);
         $role2->givePermissionTo($permissionsPermissions);
+        $role2->givePermissionTo($categoriesPermissions);
+        $role2->givePermissionTo($tagsPermissions);
 
         $role3 = Role::create(['name' => 'Super-Admin']);
 
