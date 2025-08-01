@@ -1,9 +1,14 @@
 <?php
 
 use App\Models\User;
+use Laravel\Sanctum\Sanctum;
 
 it('can show message if not verified', function () {
-    $user = User::factory()->unverified()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->unverified()->create(),
+        ['*'],
+    );
+
     $response = $this->actingAs($user)
         ->get('/api/v1/me');
 
@@ -13,7 +18,10 @@ it('can show message if not verified', function () {
 });
 
 it('cannot show message if verified', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)
         ->get('/api/v1/me');

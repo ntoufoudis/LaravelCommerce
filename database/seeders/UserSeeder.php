@@ -9,11 +9,9 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Vasileios Ntoufoudis',
-            'email' => 'info@ntoufoudis.com',
-        ]);
-
-        User::factory(50)->create();
+        for ($i = 0; $i < 50; $i++) {
+            $user = User::factory()->create();
+            $user->assignRole('customer');
+        }
     }
 }

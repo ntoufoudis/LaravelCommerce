@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-final class TokenAuthenticationController extends Controller
+class AuthenticationController extends ApiController
 {
     /**
      * Handle an incoming authentication request.
@@ -40,7 +40,7 @@ final class TokenAuthenticationController extends Controller
         }
 
         $response = [
-            'token' => $user->createToken('web')->plainTextToken,
+            'token' => $user->createToken('access-token')->plainTextToken,
         ];
 
         return response()->json($response);

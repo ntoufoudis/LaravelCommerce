@@ -9,7 +9,7 @@ it('can request reset password link', function () {
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    $this->post('/api/v1/forgot-password', ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class);
 });
@@ -19,10 +19,10 @@ it('can reset password with valid token', function () {
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    $this->post('/api/v1/forgot-password', ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function (object $notification) use ($user) {
-        $response = $this->post('/reset-password', [
+        $response = $this->post('/api/v1/reset-password', [
             'token' => $notification->token,
             'email' => $user->email,
             'password' => 'password',
@@ -42,10 +42,10 @@ it('cannot reset password with invalid token', function () {
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    $this->post('/api/v1/forgot-password', ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function (object $notification) use ($user) {
-        $response = $this->post('/reset-password', [
+        $response = $this->post('/api/v1/reset-password', [
             'token' => 'wrong_token',
             'email' => $user->email,
             'password' => 'password',
@@ -62,7 +62,7 @@ it('cannot request reset password link with invalid email', function () {
 
     $user = User::factory()->create();
 
-    $response = $this->post('/forgot-password', ['email' => 'wrong@email.com']);
+    $response = $this->post('/api/v1/forgot-password', ['email' => 'wrong@email.com']);
 
     Notification::assertNotSentTo($user, ResetPassword::class);
 

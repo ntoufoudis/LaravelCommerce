@@ -33,7 +33,15 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
 
-        return new UserResource(User::create($request->validated()));
+        $user = User::create($request->validated());
+
+        if ($request->validated('role')) {
+            $user->assignRole($request->validated('role'));
+        } else {
+            $user->assignRole('customer');
+        }
+
+        return new UserResource($user);
     }
 
     /**
@@ -54,6 +62,10 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update($request->validated());
+
+        if ($request->validated('role')) {
+            $user->syncRoles($request->validated('role'));
+        }
 
         return new UserResource($user);
     }

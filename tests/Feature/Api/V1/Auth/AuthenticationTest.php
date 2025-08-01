@@ -6,7 +6,7 @@ use Laravel\Sanctum\Sanctum;
 it('can create authenticate', function () {
     $user = User::factory()->create();
 
-    $response = $this->post('/api/login', [
+    $response = $this->post('/api/v1/login', [
         'email' => $user->email,
         'password' => 'password',
     ]);
@@ -18,14 +18,14 @@ it('can create authenticate', function () {
 it('cannot authenticate with wrong credentials', function () {
     $user = User::factory()->create();
 
-    $response = $this->post('/api/login', [
+    $response = $this->post('/api/v1/login', [
         'email' => $user->email,
         'password' => 'wrong-password',
     ]);
 
     $response->assertSessionHasErrors(['email']);
 
-    $response2 = $this->post('/api/login', [
+    $response2 = $this->post('/api/v1/login', [
         'email' => 'wrong@email.com',
         'password' => 'password',
     ]);
@@ -39,7 +39,7 @@ it('can logout user', function () {
         ['*']
     );
 
-    $response = $this->post('/api/logout');
+    $response = $this->post('/api/v1/logout');
 
     $response->assertNoContent();
 
