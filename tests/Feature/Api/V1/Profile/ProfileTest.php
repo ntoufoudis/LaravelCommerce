@@ -1,9 +1,13 @@
 <?php
 
 use App\Models\User;
+use Laravel\Sanctum\Sanctum;
 
 it('can show profile', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)
         ->get('/api/v1/me');
@@ -17,10 +21,13 @@ it('can show profile', function () {
 });
 
 it('can replace profile', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)
-        ->putJson('/api/v1/me', [
+        ->patchJson('/api/v1/me', [
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => 'password',
@@ -35,7 +42,10 @@ it('can replace profile', function () {
 });
 
 it('can update profile', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)
         ->patchJson('/api/v1/me', [

@@ -39,6 +39,7 @@ class UpdateUserRequest extends FormRequest
                     Rule::unique(User::class)->ignore($this->user()->id),
                 ],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'role' => ['required', 'string', 'exists:roles,name'],
             ];
         } else {
             return [
@@ -53,6 +54,7 @@ class UpdateUserRequest extends FormRequest
                     Rule::unique(User::class)->ignore($this->user()->id),
                 ],
                 'password' => ['sometimes', 'required', 'confirmed', Rules\Password::defaults()],
+                'role' => ['sometimes', 'required', 'string', 'exists:roles,name'],
             ];
         }
     }

@@ -5,13 +5,13 @@ namespace App\Policies;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
     public function viewAny(User $user): bool
     {
-        if ($user->can('users:viewAny')) {
+        if ($user->can('permissions:viewAny')) {
             return true;
         } else {
             return false;
@@ -20,7 +20,7 @@ class UserPolicy
 
     public function view(User $user): bool
     {
-        if ($user->can('users:view')) {
+        if ($user->can('permissions:view')) {
             return true;
         } else {
             return false;
@@ -29,7 +29,7 @@ class UserPolicy
 
     public function create(User $user): bool
     {
-        if ($user->can('users:create')) {
+        if ($user->can('permissions:create')) {
             return true;
         } else {
             return false;
@@ -38,7 +38,7 @@ class UserPolicy
 
     public function update(User $user): bool
     {
-        if ($user->can('users:update')) {
+        if ($user->can('permissions:update')) {
             return true;
         } else {
             return false;
@@ -47,7 +47,7 @@ class UserPolicy
 
     public function delete(User $user): bool
     {
-        if ($user->can('users:delete')) {
+        if ($user->can('permissions:delete')) {
             return true;
         } else {
             return false;

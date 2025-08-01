@@ -4,9 +4,13 @@ use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Laravel\Sanctum\Sanctum;
 
 it('can verify email', function () {
-    $user = User::factory()->unverified()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->unverified()->create(),
+        ['*'],
+    );
 
     Event::fake();
 
@@ -24,7 +28,10 @@ it('can verify email', function () {
 });
 
 it('cannot verify email with invalid hash', function () {
-    $user = User::factory()->unverified()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->unverified()->create(),
+        ['*'],
+    );
 
     $verificationUrl = URL::temporarySignedRoute(
         'verification.verify',
@@ -38,7 +45,10 @@ it('cannot verify email with invalid hash', function () {
 });
 
 it('cannot verify email if already verified', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     Event::fake();
 
@@ -55,7 +65,10 @@ it('cannot verify email if already verified', function () {
 });
 
 it('can send email verification link', function () {
-    $user = User::factory()->unverified()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->unverified()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)->post(route('verification.send'));
 
@@ -63,7 +76,10 @@ it('can send email verification link', function () {
 });
 
 it('cannot send email verification link if already verified', function () {
-    $user = User::factory()->create();
+    $user = Sanctum::actingAs(
+        User::factory()->create(),
+        ['*'],
+    );
 
     $response = $this->actingAs($user)->post(route('verification.send'));
 
