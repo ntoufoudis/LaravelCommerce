@@ -55,14 +55,14 @@ We welcome contributions from the community and look forward to working with you
 * **Feature Requests:** If you have a feature request, please open an issue with a clear description of the feature and its benefits.
 * **Priority:** Bug fixes will take priority over feature requests.
 
-[//]: # (## Contributors)
+## Contributors
 
-[//]: # ()
-[//]: # (<a href="https://github.com/ntoufoudis/LaravelCommerce/graphs/contributors">)
 
-[//]: # (  <img src="https://contrib.rocks/image?repo=ntoufoudis/LaravelCommerce" />)
+<a href="https://github.com/ntoufoudis/LaravelCommerce/graphs/contributors">
 
-[//]: # (</a>)
+  <img src="https://contrib.rocks/image?repo=ntoufoudis/LaravelCommerce"  alt="contributors"/>
+
+</a>
 
 
 Thank you for your contributions!
