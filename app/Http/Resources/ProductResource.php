@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Tag;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin Tag */
-class TagResource extends JsonResource
+/** @mixin Product */
+class ProductResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -16,7 +16,10 @@ class TagResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
-            'count' => $this->products()->where('status', 'publish')->count(),
+            'short_description' => $this->short_description,
+            'price' => $this->price,
+            'featured' => $this->featured,
+            'status' => $this->status,
         ];
     }
 }

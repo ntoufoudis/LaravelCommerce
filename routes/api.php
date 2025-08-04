@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Auth\RegistrationController;
 use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\PermissionController;
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\TagController;
@@ -59,5 +60,8 @@ Route::prefix('v1')->group(function () {
 
         // Tags Routes
         Route::apiResource('tags', TagController::class);
+
+        // Products Routes
+        Route::apiResource('products', ProductController::class);
     });
 });
